@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select a Quiz to Start</title>
+</head>
+<body>
+    <h1>Select a Quiz to Start</h1>
+    <ul>
+        {% for quiz in quizzes %}
+            <li><a href="{{ url_for('pregame_lobby', quiz_title=quiz.title) }}">{{ quiz.title }}</a></li>
+        {% else %}
+            <li>No quizzes available.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

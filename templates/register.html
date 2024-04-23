@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap" rel="stylesheet">
+    <style>
+        .title  {
+            color: #F86400;
+        }
+        * {
+            color: #033B55;
+            font-family: 'Rubik Mono One', monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1><span class="title">QUIZZZ INSTRUCTOR</span></h1>
+    <h2>Register</h2>
+
+    <!-- Display message if it exists -->
+    {% if message %}
+    <p style="color: red;">{{ message|safe }}</p>
+    {% endif %}
+
+    <form method="POST">
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" required><br>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required><br><br>
+        <input type="submit" value="Register">
+    </form>
+    <p>Already have a QUIZZZ account? <a href="/login">Login here</a>.</p>
+</body>
+</html>

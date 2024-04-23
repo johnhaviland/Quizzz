@@ -1,0 +1,49 @@
+<script>
+    $(document).ready(function() {
+        var questions = JSON.parse($('#questionsData').attr('data-questions'));
+        var questionCount = 0;
+
+        function addQuestion(questionData, index) {
+            let qIndex = (index !== undefined) ? index : questionCount;
+            var optionsInputHtml = '';
+            var correctAnswerInputHtml = '';
+
+            switch (questionData.type) {
+                case 'multiple choice':
+                    optionsInputHtml = `<input type="text" name="questions[options][${qIndex}]" value="${questionData.options.join(',')}" placeholder="Options separated by comma" required>`;
+                    correctAnswerInputHtml = `<input type="text" name="questions[correct_answer][${qIndex}]" value="${questionData.correct_answer}" placeholder="Correct answer" required>`;
+                    break;
+                case 'true/false':
+                    correctAnswerInputHtml = `<input type="text" name="questions[correct_answer][${qIndex}]" value="${questionData.correct_answer}" placeholder="Correct or false" required>`;
+                    break;
+                case 'drag and drop':
+                    optionsInputHtml = `<input type="text" name="questions[items][${qIndex}]" value="${questionData.items.join(',')}" placeholder="Items separated by comma" required>`;
+                    correctAnswerInputHtml = `<input type="text" name="questions[correct_order][${qIndex}]" value="${questionData.correct_order.join(',')}" placeholder="Correct order (indices separated by comma)" required>`;
+                    break;
+            }
+
+            var questionHtml = `
+            <div class="question">
+                <label>Question ${qIndex + 1}:</label>
+                <input type="text" name="questions[prompt][${qIndex}]" value="${questionData.prompt}" required>
+                <select name="questions[type][${qIndex}]" required>
+                    <option value="">Select Type</option>
+                    <option value="multiple choice" ${questionData.type === 'multiple choice' ? 'selected' : ''}>Multiple Choice</option>
+                    <option value="true/false" ${questionData.type === 'true/false' ? 'selected' : ''}>True/False</option>
+                    <option value="drag and drop" ${questionData.type === 'drag and drop' ? 'selected' : ''}>Drag and Drop</option>
+                </select>
+                ${optionsInputHtml}
+                ${correctAnswerInputHtml}
+            </div>`;
+            $("#questionsContainer").append(questionHtml);
+            questionCount++; // Increment after adding the question
+        }
+
+        $("#addQuestionBtn").click(function() {
+            addQuestion({type: '', options: [], prompt: '', correct_answer: ''});
+        });
+
+        // Load existing questions
+        questions.forEach((question, index) => addQuestion(question, index));
+    });
+</script>

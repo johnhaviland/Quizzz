@@ -1,0 +1,41 @@
+[
+    {
+        "title": "FIRST QUIZ",
+        "questions": [
+            {
+                "prompt": "What is the capital of Arizona?",
+                "type": "multiple choice",
+                "options": [
+                    "Tucson",
+                    "Yuma",
+                    "Phoenix",
+                    "Flagstaff"
+                ],
+                "correct_answer": "Phoenix"
+            },
+            {
+                "prompt": "Washington D.C. is the capital of the United States.",
+                "type": "true/false",
+                "correct_answer": "true"
+            },
+            {
+                "prompt": "Put these events in the order they occurred from earliest to latest.",
+                "type": "drag and drop",
+                "items": [
+                    "American Revolutionary War",
+                    "U.S. Civil War",
+                    "War of 1812"
+                ],
+                "correct_order": [
+                    0,
+                    2,
+                    1
+                ]
+            }
+        ]
+    },
+    {
+        "title": "SECOND QUIZ",
+        "questions": []
+    }
+]

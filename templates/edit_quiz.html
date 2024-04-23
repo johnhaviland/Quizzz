@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Quiz</title>
+    <!-- Add CSS and JavaScript as needed -->
+</head>
+<body>
+    <h1>Edit Quiz: {{ quiz.title }}</h1>
+    <form method="POST">
+        <div>
+            <label for="title">Quiz Title:</label>
+            <input type="text" id="title" name="title" value="{{ quiz.title }}" required>
+        </div>
+
+        <div id="questionsContainer">
+            {% for question in quiz.questions %}
+            <div class="question">
+                <label for="question_{{ loop.index0 }}">Question {{ loop.index0 + 1 }}:</label>
+                <input type="text" name="questions[prompt][{{ loop.index0 }}]" value="{{ question.prompt }}" required>
+
+                <!-- Add more fields for question details as in create_quiz.html, pre-populated with question data -->
+
+                <!-- Checkbox to mark the question for deletion -->
+                <label for="delete_question_{{ loop.index0 }}">Delete Question</label>
+                <input type="checkbox" name="delete_question_{{ loop.index0 }}" id="delete_question_{{ loop.index0 }}">
+            </div>
+            {% endfor %}
+        </div>
+
+        <button type="button" id="addQuestionBtn">Add Question</button>
+        <input type="submit" value="Save Changes">
+    </form>
+
+    <script>
+        // JavaScript for handling dynamic question addition as in create_quiz.html
+        // Optionally, add JavaScript to handle question deletion dynamically
+    </script>
+</body>
+</html>

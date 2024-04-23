@@ -1,0 +1,33 @@
+[
+    {
+        "title": "TESTQUIZ 123",
+        "questions": [
+            {
+                "prompt": "What is 2 + 2?",
+                "type": "multiple choice",
+                "options": [
+                    "4",
+                    "5",
+                    "6",
+                    "7"
+                ],
+                "correct_answer": "4"
+            },
+            {
+                "prompt": "Does 2+2 = 4?",
+                "type": "true/false",
+                "correct_answer": "true"
+            }
+        ]
+    },
+    {
+        "title": "Another one",
+        "questions": [
+            {
+                "prompt": "We the best?",
+                "type": "true/false",
+                "correct_answer": "true"
+            }
+        ]
+    }
+]

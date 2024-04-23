@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Quiz</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Create Quiz</h1>
+    <form id="quizForm" method="post">
+        <input type="text" name="title" placeholder="Quiz Title" required><br>
+        <div id="questionsContainer">
+            <!-- Questions will be added here dynamically -->
+        </div>
+        <button type="button" id="addQuestionBtn">Add Question</button><br>
+        <input type="submit" value="Save Quiz">
+    </form>
+
+    <script>
+    $(document).ready(function() {
+        var questionCount = 0;
+
+        function addQuestion() {
+            var questionHtml = `
+                <div class="question">
+                    <p>Question ${questionCount + 1}:</p>
+                    <input type="text" name="questions[prompt][${questionCount}]" placeholder="Question prompt" required>
+                    <select name="questions[type][${questionCount}]" class="questionType" required>
+                        <option value="">Select Type</option>
+                        <option value="multiple choice">Multiple Choice</option>
+                        <option value="true/false">True/False</option>
+                        <option value="drag and drop">Drag and Drop</option>
+                    </select>
+                    <div class="questionOptions" id="questionOptions${questionCount}">
+                        <!-- Options based on question type will be added here -->
+                    </div>
+                </div>
+            `;
+            $("#questionsContainer").append(questionHtml);
+            questionCount++;
+        }
+
+        $("#addQuestionBtn").click(function() {
+            addQuestion();
+        });
+
+        $(document).on('change', '.questionType', function() {
+            var questionIndex = $(this).parent().index();
+            var type = $(this).val();
+            var optionsContainer = $(`#questionOptions${questionIndex}`);
+            optionsContainer.empty(); // Clear previous inputs
+
+            if(type === "multiple choice") {
+                optionsContainer.append('<input type="text" name="questions[options][' + questionIndex + ']" placeholder="Options separated by comma" required>');
+                optionsContainer.append('<input type="text" name="questions[correct_answer][' + questionIndex + ']" placeholder="Correct answer" required>');
+            } else if(type === "true/false") {
+                optionsContainer.append('<select name="questions[correct_answer][' + questionIndex + ']" required><option value="true">True</option><option value="false">False</option></select>');
+            } else if(type === "drag and drop") {
+                optionsContainer.append('<input type="text" name="questions[items][' + questionIndex + ']" placeholder="Items separated by comma" required>');
+                optionsContainer.append('<input type="text" name="questions[correct_order][' + questionIndex + ']" placeholder="Correct order (indices separated by comma)" required>');
+            }
+        });
+
+        // Initially add one question
+        addQuestion();
+    });
+    </script>
+</body>
+</html>

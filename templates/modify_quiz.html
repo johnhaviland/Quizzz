@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modify Quiz</title>
+    <!-- Add any required CSS or JS -->
+</head>
+<body>
+    <h1>Modify Your Quizzes</h1>
+    <ul>
+        {% for quiz in quizzes %}
+            <li><a href="{{ url_for('edit_quiz', quiz_title=quiz.title) }}">{{ quiz.title }}</a></li>
+        {% else %}
+            <li>No quizzes found.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

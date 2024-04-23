@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Quiz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap" rel="stylesheet">
+    <style>
+        * {
+            color: #033B55;
+            font-family: 'Rubik Mono One', monospace;
+        }
+        .title {
+            color: #F86400;
+        }
+        form {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1><span class="title">QUIZZZ STUDENT</span></h1>
+    <h2>Join a Quiz</h2>
+    <form id="joinQuizForm">
+        <label for="quizCode">Enter Quiz Code:</label><br>
+        <input type="text" id="quizCode" name="quizCode" required><br><br>
+        <input type="submit" value="Join">
+    </form>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const form = document.getElementById('joinQuizForm');
+        const socket = io();
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const quizCode = document.getElementById('quizCode').value;
+            socket.emit('joinQuiz', quizCode);
+        });
+
+        // Handle events like quiz started, question change, etc.
+        socket.on('quizData', (data) => {
+            console.log('Quiz Data:', data);
+            // Redirect to quiz page or handle quiz data here
+        });
+
+        socket.on('error', (errorMessage) => {
+            alert(errorMessage); // Show error to the user
+        });
+    </script>
+</body>
+</html>
